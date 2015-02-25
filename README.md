@@ -18,4 +18,4 @@ The application is configured by passing URL parameters.
   flag to anything, including `false` or `0`, will enable it.
 * `palette`: a string identifying the color palette to use. Valid values
   are `convergence` (based on Jackson Pollock's piece _Convergence_),
-  `bright`, and `dark`. Defaults to `bright`.
+  `bright`, `dark`, and `redwhiteblack`. Defaults to `redwhiteblack`.

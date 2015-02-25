@@ -169,7 +169,14 @@ ColorPalettes = {
 
   'dark': function() {
     return HUSL.toRGB( Math.floor( Math.random() * 360 ), 100, 30 );
-  }
+  },
+
+  'redwhiteblack': (function() {
+    var colors = [0xffffff, 0x000000, 0xDB0005];
+    return function() {
+      return hexToRGB( colors[ Math.floor( Math.random() * colors.length ) ] );
+    };
+  })(),
 };
 
 views.Paint = extend( views.Base, function( stage, w, h, timer, sensitivity, palette ) {
@@ -427,8 +434,8 @@ var init = function( $container ) {
   var timer = new Timer( new Date().getTime() );
 
   var sensitivity = getUrlParameter( "sensitivity" ) || window.devicePixelRatio;
-  var paletteName = getUrlParameter( "palette" ) || 'bright';
-  var palette = ColorPalettes[ paletteName ] || ColorPalettes[ 'bright' ];
+  var paletteName = getUrlParameter( "palette" ) || 'redwhiteblack';
+  var palette = ColorPalettes[ paletteName ] || ColorPalettes[ 'redwhiteblack' ];
   var view = new views.Paint( stage, w, h, timer, sensitivity, palette );
 
   requestAnimFrame( animate );
