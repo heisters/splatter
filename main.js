@@ -155,13 +155,26 @@ _.extend( views.Base.prototype, {
 //------------------------------------------------------------------------------
 // Paint view
 //------------------------------------------------------------------------------
+ColorPalettes = {
+  'convergence': (function() {
+    var colors = [0xfa5619, 0x243470, 0xefc126, 0x0d070b, 0xfffffd]
+    return function() {
+      return hexToRGB( colors[ Math.floor( Math.random() * colors.length ) ] );
+    };
+  })(),
 
-var ColorPalette = [
-  0xfa5619, 0x243470, 0xefc126, 0x0d070b, 0xfffffd
-];
-ColorPalette.rand = function() { return this[ Math.floor( Math.random() * this.length ) ]; }
-views.Paint = extend( views.Base, function( stage, w, h, timer, sensitivity ) {
+  'bright': function() {
+    return HUSL.toRGB( Math.floor( Math.random() * 360 ), 100, 70 );
+  },
+
+  'dark': function() {
+    return HUSL.toRGB( Math.floor( Math.random() * 360 ), 100, 30 );
+  }
+};
+
+views.Paint = extend( views.Base, function( stage, w, h, timer, sensitivity, palette ) {
   this.timer = timer;
+  this.palette = palette;
   this.resetIdleTimer();
   this.sensitivity = sensitivity;
 
@@ -206,7 +219,7 @@ views.Paint = extend( views.Base, function( stage, w, h, timer, sensitivity ) {
   this.texDirty = false;
   this.previous = undefined;
   this.tintFilter = new ColorChangeFilter();
-  this.setColor( ColorPalette.rand() );
+  this.setColor( this.palette() );
 }, {
   update: function( time ) {
     // Update points ----------------------------------------------------------
@@ -315,7 +328,7 @@ views.Paint = extend( views.Base, function( stage, w, h, timer, sensitivity ) {
 
   setColor: function( color ) {
     this.color = color;
-    this.tintFilter.uniforms.uColor.value = hexToRGB( color );
+    this.tintFilter.uniforms.uColor.value = color;
   },
 
   drawPaintDrop: function( x, y, radius ) {
@@ -376,7 +389,7 @@ views.Paint = extend( views.Base, function( stage, w, h, timer, sensitivity ) {
     this.last       = undefined;
 
     var c = this.color;
-    while ( c === this.color ) c = ColorPalette.rand();
+    while ( c === this.color ) c = this.palette();
     this.setColor( c );
   },
 
@@ -414,7 +427,9 @@ var init = function( $container ) {
   var timer = new Timer( new Date().getTime() );
 
   var sensitivity = getUrlParameter( "sensitivity" ) || window.devicePixelRatio;
-  var view = new views.Paint( stage, w, h, timer, sensitivity );
+  var paletteName = getUrlParameter( "palette" ) || 'bright';
+  var palette = ColorPalettes[ paletteName ] || ColorPalettes[ 'bright' ];
+  var view = new views.Paint( stage, w, h, timer, sensitivity, palette );
 
   requestAnimFrame( animate );
 
