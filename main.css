@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,700,300);
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -53,7 +55,6 @@ html, body
   overflow: hidden;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,700,300);
 
 body
 {
@@ -76,7 +77,8 @@ a.button
   display: inline-block;
   background-color: #EEE;
   color: #333;
-  padding: 4px 5px 0px 5px;
+  padding: 2px 5px;
+  vertical-align: middle;
   font-weight: 700;
   text-decoration: none;
 }
