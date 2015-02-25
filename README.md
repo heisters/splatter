@@ -3,6 +3,8 @@ Summary
 
 This is a static, one-page app that mimicks splashing paint on canvas.
 
+[See it in action.](http://heisters.github.io/splatter)
+
 Configuration
 =============
 
