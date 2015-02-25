@@ -371,6 +371,9 @@ views.Paint = extend( views.Base, function( stage, w, h, timer, sensitivity ) {
   onBrushStart: function( ev ) {
     this.resetIdleTimer();
     this.isDragging = true;
+    // just in case it didn't get called in onBrushEnd
+    this.previous   = undefined;
+    this.last       = undefined;
 
     var c = this.color;
     while ( c === this.color ) c = ColorPalette.rand();
