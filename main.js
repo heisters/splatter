@@ -410,7 +410,7 @@ var init = function( $container ) {
 
   var timer = new Timer( new Date().getTime() );
 
-  var sensitivity = getUrlParameter( "sensitivity" ) || 1.0;
+  var sensitivity = getUrlParameter( "sensitivity" ) || window.devicePixelRatio;
   var view = new views.Paint( stage, w, h, timer, sensitivity );
 
   requestAnimFrame( animate );
