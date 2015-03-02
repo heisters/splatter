@@ -434,8 +434,9 @@ var init = function( $container ) {
   var timer = new Timer( new Date().getTime() );
 
   var sensitivity = getUrlParameter( "sensitivity" ) || window.devicePixelRatio;
-  var paletteName = getUrlParameter( "palette" ) || 'redwhiteblack';
-  var palette = ColorPalettes[ paletteName ] || ColorPalettes[ 'redwhiteblack' ];
+  var defaultPalette = 'convergence';
+  var paletteName = getUrlParameter( "palette" ) || defaultPalette;
+  var palette = ColorPalettes[ paletteName ] || ColorPalettes[ defaultPalette ];
   var view = new views.Paint( stage, w, h, timer, sensitivity, palette );
 
   requestAnimFrame( animate );
