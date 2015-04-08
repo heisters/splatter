@@ -486,6 +486,6 @@ $(function(){
   }
 
   var uid = getUrlParameter( "uid" );
-  ga('create', 'UA-40440647-2', { 'userId': uid });
+  ga('create', 'UA-61700412-1', { 'userId': uid });
   ga('send', 'pageview');
 });
